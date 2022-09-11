@@ -1,5 +1,6 @@
 package practice.thankoo.meeting.domain;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import practice.thankoo.coupon.Coupon;
+import practice.thankoo.coupon.domain.Coupon;
 import practice.thankoo.member.domain.Member;
 
 @Entity
@@ -34,8 +35,8 @@ public class Meeting {
     @Embedded
     private MeetingMembers meetingMembers;
 
-    @Embedded
-    private MeetingTime meetingTime;
+    @Column(name = "meetingTime", nullable = false)
+    private LocalDate meetingTime;
 
     @Column(name = "status", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
@@ -48,7 +49,7 @@ public class Meeting {
     @Builder
     public Meeting(final Long id,
                    final List<Member> members,
-                   final MeetingTime meetingTime,
+                   final LocalDate meetingTime,
                    final MeetingStatus meetingStatus,
                    final Coupon coupon) {
         this.id = id;
@@ -60,8 +61,20 @@ public class Meeting {
 
     private List<MeetingMember> convertToMeetingMember(final List<Member> members) {
         return members.stream()
-                .map(member -> new MeetingMember(member, this))
+                .map(member -> MeetingMember.builder()
+                        .member(member)
+                        .build())
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+        return "Meeting{" +
+                "id=" + id +
+                ", meetingMembers=" + meetingMembers +
+                ", meetingTime=" + meetingTime +
+                ", meetingStatus=" + meetingStatus +
+                ", coupon=" + coupon +
+                '}';
+    }
 }

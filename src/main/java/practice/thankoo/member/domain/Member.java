@@ -2,7 +2,6 @@ package practice.thankoo.member.domain;
 
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,21 +24,10 @@ public class Member {
 
     private String name;
 
-    private String email;
-
-    @Column(name = "social_id")
-    private String socialId;
-
-    @Column(name = "image_url", length = 2_000)
-    private String imageUrl;
-
     @Builder
-    public Member(final Long id, final String name, final String email, final String socialId, final String imageUrl) {
+    public Member(final Long id, final String name) {
         this.id = id;
         this.name = name;
-        this.email = email;
-        this.socialId = socialId;
-        this.imageUrl = imageUrl;
     }
 
     public void updateName(final String name) {
@@ -77,9 +65,6 @@ public class Member {
         return "Member{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", socialId='" + socialId + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 }
