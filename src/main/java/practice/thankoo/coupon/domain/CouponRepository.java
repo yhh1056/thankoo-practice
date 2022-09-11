@@ -1,4 +1,4 @@
-package practice.thankoo.coupon;
+package practice.thankoo.coupon.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

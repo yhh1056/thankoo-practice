@@ -1,4 +1,4 @@
-package practice.thankoo.coupon;
+package practice.thankoo.coupon.domain;
 
 import java.util.Objects;
 import javax.persistence.Column;

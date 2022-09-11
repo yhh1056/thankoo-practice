@@ -19,7 +19,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import practice.thankoo.coupon.Coupon;
+import practice.thankoo.coupon.domain.Coupon;
 import practice.thankoo.member.domain.Member;
 
 @Entity
