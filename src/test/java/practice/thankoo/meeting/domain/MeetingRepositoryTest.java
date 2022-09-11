@@ -6,7 +6,6 @@ import static practice.thankoo.meeting.domain.MeetingStatus.ON_PROGRESS;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
@@ -21,7 +20,7 @@ import practice.thankoo.member.domain.Member;
 import practice.thankoo.member.domain.MemberRepository;
 
 @DataJpaTest
-class MeetingTest {
+class MeetingRepositoryTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -50,24 +49,6 @@ class MeetingTest {
         meetingRepository.delete(meeting);
 
         assertThat(memberRepository.findAll()).hasSize(2);
-    }
-
-    /**
-     * 회원을 삭제하면 회원이 참여한 미팅도 모두 삭제된다.
-     */
-    @Disabled
-    @Test
-    void deleteMember() {
-        Member sender = memberRepository.save(Member.builder().name("호호").build());
-        Member receiver = memberRepository.save(Member.builder().name("후니").build());
-        Coupon coupon = 쿠폰_저장(sender, receiver);
-        미팅_저장(sender, receiver, coupon);
-
-        memberRepository.delete(sender);
-
-        assertThat(memberRepository.findAll()).hasSize(1);
-        assertThat(couponRepository.findAll()).hasSize(0);
-        assertThat(meetingRepository.findAll()).hasSize(0);
     }
 
     private Coupon 쿠폰_저장(final Member sender, final Member receiver) {

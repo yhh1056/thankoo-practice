@@ -17,7 +17,7 @@ public class MeetingMembers {
 
     private static final int STANDARD_MEMBER_COUNT = 2;
 
-    @OneToMany(mappedBy = "meeting", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "meeting", cascade = CascadeType.PERSIST)
     private List<MeetingMember> meetingMembers = new ArrayList<>();
 
     @Builder
