@@ -7,15 +7,17 @@ import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MeetingMembers {
 
     private static final int STANDARD_MEMBER_COUNT = 2;
 
-    @OneToMany(mappedBy = "meeting", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "meeting", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<MeetingMember> meetingMembers = new ArrayList<>();
 
     @Builder
@@ -28,5 +30,12 @@ public class MeetingMembers {
         if (meetingMembers.size() != STANDARD_MEMBER_COUNT) {
             throw new RuntimeException("참여자는 2명이어야합니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "MeetingMembers{" +
+                "meetingMembers=" + meetingMembers +
+                '}';
     }
 }

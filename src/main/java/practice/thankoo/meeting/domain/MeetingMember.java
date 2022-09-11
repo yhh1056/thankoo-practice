@@ -13,12 +13,14 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import practice.thankoo.member.domain.Member;
 
 @Entity
 @Table(name = "meeting_member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 public class MeetingMember {
 
     @Id
@@ -38,10 +40,6 @@ public class MeetingMember {
         this.id = id;
         this.member = member;
         this.meeting = meeting;
-    }
-
-    public MeetingMember(final Member member, final Meeting meeting) {
-        this(null, member, meeting);
     }
 
     @Override
